@@ -32,7 +32,6 @@ const customRender = (
     ...renderOptions,
   });
 };
-
 // re-exportamos todo
 export * from "@testing-library/react";
 
