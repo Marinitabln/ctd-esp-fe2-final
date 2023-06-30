@@ -105,12 +105,12 @@ describe("Cita", () => {
 
     describe("Cuando se ingresa un dato inválido", () => {
         test("Al ingresar un número, debería mostrar leyenda 'Por favor ingrese un nombre válido'", async () => {
-            const inputAutor = screen.getByLabelText("Author Cita")
+            const inputAutor = await screen.getByLabelText("Author Cita")
             userEvent.click(inputAutor)
             userEvent.clear(inputAutor)
-            userEvent.keyboard('25')
+            await userEvent.keyboard('25')
             const btnObtenerCita = await screen.findByRole('button', { name: /Obtener Cita/i })
-            userEvent.click(btnObtenerCita)
+            await userEvent.click(btnObtenerCita)
             await waitFor(() => {
                 expect(screen.queryByText(/por favor ingrese un nombre válido/i)).toBeInTheDocument()
             });
@@ -119,7 +119,7 @@ describe("Cita", () => {
             const inputAutor = screen.getByLabelText("Author Cita")
             userEvent.click(inputAutor)
             userEvent.clear(inputAutor)
-            userEvent.keyboard('elisa')
+            await userEvent.keyboard('elisa')
             const btnObtenerCita = await screen.findByRole('button', { name: /Obtener Cita/i })
             userEvent.click(btnObtenerCita)
             await waitFor(() => {
@@ -132,7 +132,7 @@ describe("Cita", () => {
         test("Debería limpiar el input", async () => {
             const inputAutor = screen.getByLabelText("Author Cita")
             userEvent.click(inputAutor)
-            userEvent.keyboard('prueba')
+            await userEvent.keyboard('prueba')
             const btnBorrar = screen.getByRole('button', { name: /borrar/i })
             userEvent.click(btnBorrar)
             await waitFor(() => {
