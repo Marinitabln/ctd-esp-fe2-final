@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import {
-  TarjetaModal,
   ContenedorNoticias,
   TituloNoticias
 } from "./styled";
@@ -9,7 +8,8 @@ import { obtenerInformacion } from "./utils";
 import { ListadoNoticias } from "./ListaNoticias";
 import { CardModal } from "./TarjetaModal";
 
-
+// Implementación de principio Single Responsability - SOLID 
+// El proceso de refactorización se llevó a cabo siguiendo este principio, atomizando las funcionalidades en diferentes componentes, y permitiendo que el componente Noticias se encargue unicamente de renderizar las mismas. 
 
 const Noticias = () => {
   const [noticias, setNoticias] = useState<INoticiasNormalizadas[]>([]);
@@ -23,7 +23,7 @@ const Noticias = () => {
     <ContenedorNoticias>
       <TituloNoticias>Noticias de los Simpsons</TituloNoticias>
       <ListadoNoticias noticias={noticias} setModal={setModal} />
-      {modal ? (<CardModal noticiaSeleccionada={modal} setModal={setModal} />
+      {modal ? (<CardModal noticiaSeleccionada={modal} setNoticiaSeleccionada={setModal} />
       ) : null}
     </ContenedorNoticias>
   );

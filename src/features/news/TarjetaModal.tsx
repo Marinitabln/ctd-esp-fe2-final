@@ -1,20 +1,21 @@
-import { ContenedorModal, TarjetaModal, CloseButton, ImagenModal, CotenedorTexto, TituloModal, DescripcionModal, BotonSuscribir } from "./styled"
+import { ContenedorModal, TarjetaModal, CloseButton, ImagenModal, CotenedorTexto, TituloModal, DescripcionModal} from "./styled"
 import { SuscribeImage, CloseButton as Close } from "../../assets";
 import { INoticiasNormalizadas } from "./types";
+import { BtnSuscribir } from "./BotonSuscribir";
 
 interface IProps {
     noticiaSeleccionada: INoticiasNormalizadas | null
-    setModal: React.Dispatch<React.SetStateAction<INoticiasNormalizadas | null>>
+    setNoticiaSeleccionada: React.Dispatch<React.SetStateAction<INoticiasNormalizadas | null>>
 }
 
-export const CardModal = ({noticiaSeleccionada, setModal}:IProps)=>{
+export const CardModal = ({noticiaSeleccionada, setNoticiaSeleccionada}:IProps)=>{
     const tituloPremium = "Suscríbete a nuestro Newsletter"
     const descripcionPremium = "Suscríbete a nuestro newsletter y recibe noticias de nuestros personajes favoritos."
 
     return(
         <ContenedorModal>
               <TarjetaModal>
-                <CloseButton onClick={() => setModal(null)}>
+                <CloseButton onClick={() => setNoticiaSeleccionada(null)}>
                   <img src={Close} alt="close-button" />
                 </CloseButton>
                 <ImagenModal src={noticiaSeleccionada?.esPremium? SuscribeImage : noticiaSeleccionada?.imagen} alt="mr-burns-excelent" />
@@ -23,16 +24,7 @@ export const CardModal = ({noticiaSeleccionada, setModal}:IProps)=>{
                   <DescripcionModal>
                   {noticiaSeleccionada?.esPremium? descripcionPremium : noticiaSeleccionada?.descripcion}
                   </DescripcionModal>
-                  {noticiaSeleccionada?.esPremium && <BotonSuscribir
-                    onClick={() =>
-                      setTimeout(() => {
-                        alert("Suscripto!");
-                        setModal(null);
-                      }, 1000)
-                    }
-                  >
-                    Suscríbete
-                  </BotonSuscribir>}
+                  {noticiaSeleccionada?.esPremium && <BtnSuscribir setNoticia={setNoticiaSeleccionada} />}
                 </CotenedorTexto>
               </TarjetaModal>
             </ContenedorModal>
